@@ -10,18 +10,23 @@
 <canvas id="particles"></canvas>
 
   <header>
-    <nav>
-      <span class="logo">{ AFSchlosser }</span>
-      <ul>
-        <li><a href="#sobre">Sobre</a></li>
-        <li><a href="#habilidades">Habilidades</a></li>
-        <li><a href="#projetos">Projetos</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-      <a href="mailto:andersonschlosserr@gemail.com" class="nav-btn">FALE COMIGO</a>
-    </nav>
-    <div class="nav-line"></div>
-  </header>
+  <nav>
+    <span class="logo">{ AFSchlosser }</span>
+    <div class="mobile-menu-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <ul id="nav-menu">
+      <li><a href="#sobre" onclick="toggleMenu()">Sobre</a></li>
+      <li><a href="#habilidades" onclick="toggleMenu()">Habilidades</a></li>
+      <li><a href="#projetos" onclick="toggleMenu()">Projetos</a></li>
+      <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+    </ul>
+    <a href="mailto:andersonschlosserr@gmail.com" class="nav-btn">FALE COMIGO</a>
+  </nav>
+  <div class="nav-line"></div>
+</header>
 
   <section id="hero">
     <div class="hero-bg"></div>
