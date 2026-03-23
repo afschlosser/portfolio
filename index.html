@@ -3,39 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anderson | Desenvolvedor</title>
+  <title>Anderson Schlosser | Software Engineer Student</title>
+  
+  <meta name="description" content="Portfólio de Anderson Schlosser. Estudante de Engenharia de Software focado em Python, IA e Desenvolvimento Web.">
+  <meta property="og:title" content="Anderson Schlosser | Desenvolvedor">
+  <meta property="og:description" content="Desenvolvedor Python, MySQL e entusiasta de IA. Disponível para projetos e freelances.">
+  <meta property="og:type" content="website">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
   <link rel="stylesheet" href="style.css">
+  
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-<canvas id="particles"></canvas>
+  <canvas id="particles"></canvas>
 
   <header>
-  <nav>
-    <span class="logo">{ AFSchlosser }</span>
-    <div class="mobile-menu-icon" onclick="toggleMenu()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <ul id="nav-menu">
-      <li><a href="#sobre" onclick="toggleMenu()">Sobre</a></li>
-      <li><a href="#habilidades" onclick="toggleMenu()">Habilidades</a></li>
-      <li><a href="#projetos" onclick="toggleMenu()">Projetos</a></li>
-      <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
-    </ul>
-    <a href="mailto:andersonschlosserr@gmail.com" class="nav-btn">FALE COMIGO</a>
-  </nav>
-  <div class="nav-line"></div>
-</header>
+    <nav>
+      <span class="logo">{ AFSchlosser }</span>
+      
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul id="nav-menu">
+        <li><a href="#sobre" onclick="toggleMenu()">Sobre</a></li>
+        <li><a href="#habilidades" onclick="toggleMenu()">Habilidades</a></li>
+        <li><a href="#projetos" onclick="toggleMenu()">Projetos</a></li>
+        <li><a href="#contato" onclick="toggleMenu()">Contato</a></li>
+      </ul>
+      
+      <a href="mailto:andersonschlosserr@gmail.com" class="nav-btn">FALE COMIGO</a>
+    </nav>
+    <div class="nav-line"></div>
+  </header>
 
   <section id="hero">
     <div class="hero-bg"></div>
     <span class="hero-tag">Disponível para FREELAS</span>
     <h1>Olá, eu sou <span class="nome">Anderson Schlosser</span><span class="cursor"></span></h1>
     <p id="typing-text"></p>
+    
     <div class="hero-btns">
-      <a href="#projetos" class="btn-primary">Ver projetos</a>
-      <a href="https://github.com/afschlosser" target="_blank" class="btn-secondary">GitHub</a>
+      <a href="#projetos" class="btn-primary">
+        <i class="fa-solid fa-code-branch"></i> Ver projetos
+      </a>
+      <a href="https://github.com/afschlosser" target="_blank" class="btn-secondary">
+        <i class="fa-brands fa-github"></i> GitHub
+      </a>
+      <a href="https://linkedin.com/in/anderson-schlosser" target="_blank" class="btn-secondary">
+        <i class="fa-brands fa-linkedin"></i> LinkedIn
+      </a>
+ <a href="curriculo-anderson.pdf" target="_blank" class="btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download CV
+</a>
+      </a>
     </div>
   </section>
 
@@ -56,6 +81,7 @@
     <p>
       Estudante de Engenharia de Software no penúltimo semestre,
       com experiência em Python, MySQL e desenvolvimento web.
+      Focado no desenvolvimento de soluções inteligentes e Inteligência Artificial.
       Busco oportunidades como desenvolvedor freelancer e júnior.
     </p>
   </section>
@@ -64,39 +90,20 @@
     <h2>HABILIDADES</h2>
     <div class="skill-bars">
       <div class="skill-bar">
-        <div class="skill-bar-header">
-          <span>Python</span>
-   
-        </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" data-width="70"></div>
-        </div>
+        <div class="skill-bar-header"><span>Python</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
       </div>
       <div class="skill-bar">
-        <div class="skill-bar-header">
-          <span>MySQL</span>
-        </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" data-width="65"></div>
-        </div>
+        <div class="skill-bar-header"><span>MySQL</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="65"></div></div>
       </div>
       <div class="skill-bar">
-        <div class="skill-bar-header">
-          <span>HTML/CSS</span>
-
-        </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" data-width="60"></div>
-        </div>
+        <div class="skill-bar-header"><span>HTML/CSS</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div>
       </div>
       <div class="skill-bar">
-        <div class="skill-bar-header">
-          <span>Git</span>
-  
-        </div>
-        <div class="skill-bar-track">
-          <div class="skill-bar-fill" data-width="50"></div>
-        </div>
+        <div class="skill-bar-header"><span>Git</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div>
       </div>
     </div>
   </section>
@@ -105,20 +112,20 @@
     <h2>PROJETOS</h2>
     <div class="cards">
       <div class="card">
-        <h3>Projeto 1</h3>
-        <p>Descrição breve do projeto e o problema que ele resolve.</p>
+        <h3>Projeto de IA / Automação</h3>
+        <p>Desenvolvimento de modelos preditivos e automação de processos utilizando Python.</p>
         <div class="card-tags">
           <span class="tag">Python</span>
-          <span class="tag">MySQL</span>
+          <span class="tag">IA</span>
         </div>
         <a href="#" class="card-link">Ver no GitHub →</a>
       </div>
       <div class="card">
-        <h3>Projeto 2</h3>
-        <p>Descrição breve do projeto e o problema que ele resolve.</p>
+        <h3>Sistema Web Full Stack</h3>
+        <p>Interface responsiva integrada com banco de dados MySQL para gestão de dados.</p>
         <div class="card-tags">
           <span class="tag">Flask</span>
-          <span class="tag">HTML/CSS</span>
+          <span class="tag">MySQL</span>
         </div>
         <a href="#" class="card-link">Ver no GitHub →</a>
       </div>
@@ -127,7 +134,7 @@
 
   <section id="contato">
     <h2>CONTATO</h2>
-    <p>Aberto para freelas e oportunidades júnior.</p>
+    <p>Interessado em colaborar ou contratar um freela?</p>
     <a href="mailto:andersonschlosserr@gmail.com" class="btn-primary">andersonschlosserr@gmail.com</a>
   </section>
 
@@ -137,7 +144,13 @@
   </footer>
 
   <script>
-    // Skills bar
+    // Menu Mobile Toggle
+    function toggleMenu() {
+      const menu = document.getElementById('nav-menu');
+      menu.classList.toggle('active');
+    }
+
+    // Skills bar Animation
     const skills = document.querySelectorAll('.skill');
     skills.forEach((skill, i) => {
       skill.style.opacity = '0';
@@ -148,18 +161,8 @@
         skill.style.transform = 'translateY(0)';
       }, 300 + i * 100);
     });
-    skills.forEach(skill => {
-      skill.addEventListener('click', () => {
-        skills.forEach(s => s.classList.remove('active'));
-        skill.classList.add('active');
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple');
-        skill.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-      });
-    });
 
-    // Partículas
+    // Partículas Background
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.style.position = 'fixed';
@@ -169,6 +172,7 @@
     canvas.style.height = '100%';
     canvas.style.zIndex = '-1';
     canvas.style.pointerEvents = 'none';
+    
     let particles = [];
     function resize() {
       canvas.width = window.innerWidth;
@@ -176,6 +180,7 @@
     }
     resize();
     window.addEventListener('resize', resize);
+
     function createParticle() {
       return {
         x: Math.random() * canvas.width,
@@ -187,6 +192,7 @@
       };
     }
     for (let i = 0; i < 80; i++) particles.push(createParticle());
+
     function drawParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(p => {
@@ -199,28 +205,13 @@
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
       });
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 191, 165, ${0.15 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
       requestAnimationFrame(drawParticles);
     }
     drawParticles();
 
-    // Efeito de digitação
+    // Efeito de Digitação
     const texts = [
-      'Desenvolvedor · Python & Web',
+      'Desenvolvedor · Python & IA',
       'Estudante de Eng. de Software',
       'Disponível para freelas',
     ];
@@ -250,7 +241,7 @@
     }
     type();
 
-    // Animação das barras de progresso
+    // Intersection Observer para as Barras de Skills
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -263,6 +254,5 @@
     const skillsSection = document.getElementById('habilidades');
     if (skillsSection) observer.observe(skillsSection);
   </script>
-
 </body>
 </html>

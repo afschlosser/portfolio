@@ -43,22 +43,45 @@ nav {
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
-}
-
-.logo {
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #00bfa5;
-  letter-spacing: 2px;
-  font-family: 'Courier New', monospace;
+  position: relative; /* Essencial para o menu se basear no centro daqui */
+  height: 60px;       /* Defina uma altura para garantir o alinhamento vertical */
 }
 
 nav ul {
   list-style: none;
   display: flex;
   gap: 2rem;
+  
+  /* MÁGICA DA CENTRALIZAÇÃO ABSOLUTA */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
+/* Mantém o logo na esquerda e o botão na direita sem afetar o centro */
+/* --- ENCONTRE ESTE BLOCO E SUBSTITUA --- */
+
+.logo {
+  justify-self: start;  /* Mantém o Grid feliz, na esquerda */
+  font-size: 1.1rem;
+  font-weight: bold;
+  
+  /* FORÇA A FONTE E A COR ORIGINAL */
+  color: #00bfa5 !important; 
+  font-family: 'Courier New', monospace !important;
+  
+  letter-spacing: 2px;
+}
+
+/* --- MANTENHA TODO O RESTANTE ABAIXO EXATAMENTE COMO ESTAVA --- */
+
+.nav-btn {
+  z-index: 2;
+  /* Garante que o botão não estique */
+  white-space: nowrap; 
+}
+
+/* Mantém seus estilos de link originais abaixo */
 nav ul a {
   color: #888;
   font-size: 0.85rem;
@@ -66,25 +89,6 @@ nav ul a {
   letter-spacing: 1px;
   position: relative;
   padding-bottom: 4px;
-}
-
-nav ul a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #00bfa5;
-  transition: width 0.3s;
-}
-
-nav ul a:hover {
-  color: #00bfa5;
-}
-
-nav ul a:hover::after {
-  width: 100%;
 }
 
 .nav-btn {
@@ -117,6 +121,7 @@ nav ul a:hover::after {
 .nav-btn:hover::before {
   transform: translateX(0);
 }
+
 #hero {
   text-align: center;
   padding: 6rem 2rem;
@@ -180,11 +185,14 @@ nav ul a:hover::after {
   position: relative;
 }
 
+/* --- BOTÕES DO HERO (AJUSTADOS PARA ALINHAMENTO) --- */
 .hero-btns {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  align-items: center; /* Garante alinhamento vertical */
   position: relative;
+  flex-wrap: wrap;
 }
 
 .btn-primary {
@@ -195,12 +203,16 @@ nav ul a:hover::after {
   font-weight: 600;
   font-size: 0.9rem;
   transition: background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-primary:hover {
   background: #00897b;
 }
 
+/* Aplicado ao GitHub e LinkedIn conforme seu padrão original */
 .btn-secondary {
   background: transparent;
   color: #00bfa5;
@@ -209,12 +221,36 @@ nav ul a:hover::after {
   font-size: 0.9rem;
   border: 0.5px solid #00bfa5;
   transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .btn-secondary:hover {
   background: rgba(0,191,165,0.1);
 }
 
+/* Botão de CV mantendo seu estilo de borda tracejada */
+.btn-cv {
+  background: rgba(0, 191, 165, 0.05);
+  color: #00bfa5;
+  padding: 0.7rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  border: 1px dashed #00bfa5;
+  transition: all 0.2s;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cv:hover {
+  background: #00bfa5;
+  color: #0f0f0f;
+}
+
+/* --- SEÇÕES E SKILLS --- */
 .skills-bar {
   background: #111;
   border-top: 0.5px solid #1a1a1a;
@@ -224,6 +260,12 @@ nav ul a:hover::after {
   gap: 0.75rem;
   align-items: center;
   flex-wrap: wrap;
+  justify-content: center;
+  
+  /* Aumentamos a margem e garantimos que ela empurre o conteúdo */
+  margin-top: 4rem; 
+  position: relative;
+  z-index: 10;
 }
 
 .skills-label {
@@ -238,6 +280,7 @@ nav ul a:hover::after {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  justify-content: center; /* Centraliza as skills no mobile */
 }
 
 .skill {
@@ -248,17 +291,19 @@ nav ul a:hover::after {
   padding: 4px 12px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
+  transition: all 0.2s; /* Essencial para o efeito de cor no hover */
+  position: relative;   /* Essencial para o efeito Ripple */
+  overflow: hidden;     /* Essencial para o efeito Ripple */
   user-select: none;
 }
 
+/* Efeito de Hover que você enviou */
 .skill:hover {
   border-color: #00bfa5;
   color: #00bfa5;
 }
 
+/* Estado Ativo */
 .skill.active {
   border-color: #00bfa5;
   color: #00bfa5;
@@ -266,6 +311,7 @@ nav ul a:hover::after {
   box-shadow: 0 0 8px rgba(0,191,165,0.15);
 }
 
+/* O elemento do Ripple (Gerado pelo seu JS) */
 .ripple {
   position: absolute;
   width: 80px;
@@ -284,6 +330,71 @@ nav ul a:hover::after {
 @keyframes ripple-anim {
   to { transform: scale(2.5); opacity: 0; }
 }
+
+.skills-label {
+  color: #555;
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+.skills-list {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center; /* Centraliza as skills no mobile */
+}
+
+.skill {
+  background: #1a1a1a;
+  border: 0.5px solid #2a2a2a;
+  color: #888;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s; /* Essencial para o efeito de cor no hover */
+  position: relative;   /* Essencial para o efeito Ripple */
+  overflow: hidden;     /* Essencial para o efeito Ripple */
+  user-select: none;
+}
+
+/* Efeito de Hover que você enviou */
+.skill:hover {
+  border-color: #00bfa5;
+  color: #00bfa5;
+}
+
+/* Estado Ativo */
+.skill.active {
+  border-color: #00bfa5;
+  color: #00bfa5;
+  background: rgba(0,191,165,0.08);
+  box-shadow: 0 0 8px rgba(0,191,165,0.15);
+}
+
+/* O elemento do Ripple (Gerado pelo seu JS) */
+.ripple {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(0,191,165,0.2);
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-anim 0.6s linear;
+  top: 50%;
+  left: 50%;
+  margin-top: -40px;
+  margin-left: -40px;
+  pointer-events: none;
+}
+
+@keyframes ripple-anim {
+  to { transform: scale(2.5); opacity: 0; }
+}
+
+/* --- CARDS E CONTEÚDO --- */
 section {
   max-width: 1000px;
   margin: 0 auto;
@@ -371,46 +482,7 @@ section h2::after {
   letter-spacing: 0.5px;
 }
 
-#contato {
-  text-align: center;
-}
-
-#contato p {
-  color: #888;
-  margin-bottom: 1.5rem;
-}
-
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  color: #555;
-  font-size: 0.8rem;
-  border-top: 0.5px solid #1a1a1a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.status-dot {
-  width: 7px;
-  height: 7px;
-  background: #00bfa5;
-  border-radius: 50%;
-  display: inline-block;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-#skills-progress {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-}
-
+/* --- PROGRESS BARS --- */
 .skill-bars {
   display: flex;
   flex-direction: column;
@@ -441,60 +513,73 @@ footer {
   transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 8px rgba(0,191,165,0.4);
 }
-#habilidades {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #555;
+  font-size: 0.8rem;
+  border-top: 0.5px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
-/* --- APENAS ADICIONE ESTE BLOCO AO FINAL DO SEU CSS --- */
 
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #00bfa5;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
-    /* Ajusta o título para não vazar da tela */
-    #hero h1 {
-        font-size: 1.8rem;
-        padding: 0 10px;
-    }
+  #hero h1 {
+    font-size: 1.8rem;
+    padding: 0 10px;
+  }
 
-    /* Empilha os botões (Ver projetos / GitHub) */
-    .hero-btns {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
+  .hero-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 10px;
+  }
 
-    .btn-primary, .btn-secondary {
-        width: 80%; /* Botões ficam mais fáceis de clicar no touch */
-        text-align: center;
-    }
+  .btn-primary { 
+    grid-column: span 2; 
+    width: 100%;
+    text-align: center;
+  }
 
-    /* Esconde o menu de texto para não embolar com o logo */
-    /* Dica: em mobile, o ideal é usar um menu hamburguer, 
-       mas para não quebrar seu JS, vamos apenas simplificar o topo */
-    nav ul {
-        display: none; 
-    }
+  .btn-secondary, .btn-cv {
+    width: 100%;
+    text-align: center;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.8rem;
+  }
 
-    .nav-btn {
-        font-size: 0.7rem;
-        padding: 0.3rem 0.6rem;
-    }
+  nav ul {
+    display: none; 
+  }
 
-    /* Ajusta os cards para ocuparem a tela toda */
-    .cards {
-        grid-template-columns: 1fr;
-        padding: 0 10px;
-    }
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
 
-    /* Garante que o texto do "Sobre Mim" não fique colado nas bordas */
-    #sobre p {
-        font-size: 0.9rem;
-        padding: 0 15px;
-        text-align: justify;
-    }
-
-    /* Ajusta a barra de progresso para não ficar muito larga */
-    .skill-bars {
-        width: 100%;
-        padding: 0 10px;
-    }
+  #sobre p {
+    font-size: 0.9rem;
+    padding: 0 15px;
+    text-align: justify;
+  }
 }
