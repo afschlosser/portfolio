@@ -82,13 +82,36 @@ nav ul {
 }
 
 /* Mantém seus estilos de link originais abaixo */
+/* --- RECUPERANDO A ANIMAÇÃO DOS LINKS --- */
 nav ul a {
   color: #888;
   font-size: 0.85rem;
-  transition: color 0.2s;
   letter-spacing: 1px;
-  position: relative;
+  position: relative;     /* Essencial para a linha saber onde começar */
   padding-bottom: 4px;
+  transition: color 0.2s; /* Suaviza a mudança da cor do texto */
+  display: inline-block;  /* Garante que o link tenha área clicável e de animação */
+}
+
+/* A linha que aparece embaixo */
+nav ul a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;               /* Começa com tamanho zero */
+  height: 1px;
+  background: #00bfa5;    /* Sua cor verde original */
+  transition: width 0.3s; /* A velocidade da animação que você definiu */
+}
+
+/* O efeito ao passar o mouse */
+nav ul a:hover {
+  color: #00bfa5;         /* Muda a cor do texto para verde */
+}
+
+nav ul a:hover::after {
+  width: 100%;            /* A linha cresce até preencher todo o texto */
 }
 
 .nav-btn {
