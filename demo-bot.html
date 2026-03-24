@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo — Bot WhatsApp Futebol KM6</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+    header {
+      background: rgba(15,15,15,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid rgba(255,255,255,0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    header a {
+      color: #00bfa5;
+      text-decoration: none;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.2s;
+    }
+    header a:hover { opacity: 0.7; }
+    header span {
+      color: #444;
+      font-size: 0.85rem;
+    }
+    header h1 {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #e0e0e0;
+    }
+    .hero {
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: rgba(0,191,165,0.1);
+      border: 0.5px solid rgba(0,191,165,0.3);
+      color: #00bfa5;
+      font-size: 0.75rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+    .hero h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      color: #888;
+      font-size: 0.95rem;
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+    }
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .tag {
+      background: rgba(0,191,165,0.1);
+      color: #00bfa5;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 4px;
+      border: 0.5px solid rgba(0,191,165,0.2);
+    }
+    .demo-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      padding: 0 2rem 4rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .info-panel {
+      flex: 1;
+      min-width: 260px;
+      max-width: 360px;
+    }
+    .info-panel h3 {
+      font-size: 0.85rem;
+      color: #00bfa5;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .flow-step {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+    .flow-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0,191,165,0.1);
+      border: 0.5px solid rgba(0,191,165,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .flow-text strong {
+      display: block;
+      font-size: 0.85rem;
+      color: #e0e0e0;
+      font-weight: 500;
+    }
+    .flow-text span {
+      font-size: 0.78rem;
+      color: #666;
+    }
+    .cmds {
+      margin-top: 2rem;
+    }
+    .cmd-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 0.5px solid #1a1a1a;
+      font-size: 0.82rem;
+    }
+    .cmd-row code {
+      background: #1a1a1a;
+      color: #00bfa5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+    }
+    .cmd-row span {
+      color: #666;
+    }
+    .phone-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .phone {
+      width: 300px;
+      background: #111;
+      border-radius: 36px;
+      border: 6px solid #222;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #333, 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .phone-bar {
+      background: #075E54;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .phone-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #128C7E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .phone-name { color: #fff; font-size: 14px; font-weight: 500; }
+    .phone-status { color: rgba(255,255,255,0.6); font-size: 11px; }
+    .chat-area {
+      background: #0d1117;
+      height: 380px;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      scroll-behavior: smooth;
+    }
+    .msg {
+      max-width: 82%;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .msg-time {
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 3px;
+      text-align: right;
+    }
+    .msg.in {
+      background: #1f2c33;
+      color: #e9edef;
+      align-self: flex-start;
+      border-radius: 0 8px 8px 8px;
+    }
+    .msg.bot {
+      background: #1a2535;
+      color: #e9edef;
+      align-self: flex-start;
+      border-radius: 0 8px 8px 8px;
+      border-left: 3px solid #00bfa5;
+    }
+    .typing {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      padding: 8px 12px;
+      background: #1a2535;
+      border-radius: 0 8px 8px 8px;
+      align-self: flex-start;
+      width: fit-content;
+    }
+    .typing span {
+      width: 6px;
+      height: 6px;
+      background: #00bfa5;
+      border-radius: 50%;
+      animation: bounce 1s infinite;
+    }
+    .typing span:nth-child(2) { animation-delay: 0.15s; }
+    .typing span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes bounce {
+      0%,60%,100% { transform: translateY(0); }
+      30% { transform: translateY(-5px); }
+    }
+    .cmd-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px;
+      background: #161b22;
+      border-top: 0.5px solid #1a1a1a;
+    }
+    .cmd-btn {
+      background: #1f2c33;
+      border: 0.5px solid #2a3a45;
+      color: #00bfa5;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .cmd-btn:hover { background: #0d2a26; }
+    .cmd-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .github-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #00bfa5;
+      border: 0.5px solid #00bfa5;
+      padding: 0.6rem 1.4rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .github-btn:hover {
+      background: rgba(0,191,165,0.1);
+    }
+    @media (max-width: 700px) {
+      .demo-wrap { flex-direction: column; align-items: center; }
+      .info-panel { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Voltar</a>
+  <span>/</span>
+  <h1>Bot WhatsApp — Futebol KM6</h1>
+</header>
+
+<div class="hero">
+  <span class="hero-tag">DEMO INTERATIVA</span>
+  <h2>Bot WhatsApp ⚽</h2>
+  <p>Automação completa para gerenciar times de futebol diretamente no WhatsApp. Clique nos comandos abaixo para ver o bot em ação.</p>
+  <div class="tags">
+    <span class="tag">Node.js</span>
+    <span class="tag">WhatsApp API</span>
+    <span class="tag">Automação</span>
+  </div>
+</div>
+
+<div class="demo-wrap">
+  <div class="info-panel">
+    <h3>FLUXO SEMANAL</h3>
+    <div class="flow-step">
+      <div class="flow-icon">📅</div>
+      <div class="flow-text">
+        <strong>Segunda · 19h</strong>
+        <span>Bot abre as inscrições automaticamente</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">📋</div>
+      <div class="flow-text">
+        <strong>Seg → Qua</strong>
+        <span>Membros se inscrevem por posição no grupo</span>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-icon">⚽</div>
+      <div class="flow-text">
+        <strong>Quarta · 16h</strong>
+        <span>Bot sorteia os times e envia para o grupo</span>
+      </div>
+    </div>
+
+    <div class="cmds">
+      <h3 style="margin-bottom:0.8rem;">COMANDOS</h3>
+      <div class="cmd-row">
+        <code>goleiro Nome</code>
+        <span>Inscreve como goleiro</span>
+      </div>
+      <div class="cmd-row">
+        <code>linha Nome</code>
+        <span>Inscreve como linha</span>
+      </div>
+      <div class="cmd-row">
+        <code>reserva Nome</code>
+        <span>Inscreve como reserva</span>
+      </div>
+      <div class="cmd-row">
+        <code>remover Nome</code>
+        <span>Remove da lista</span>
+      </div>
+      <div class="cmd-row">
+        <code>!lista</code>
+        <span>Ver inscritos</span>
+      </div>
+      <div class="cmd-row">
+        <code>!sortear</code>
+        <span>Sortear os times</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="phone-bar">
+        <div class="phone-avatar">⚽</div>
+        <div>
+          <div class="phone-name">Futebol KM6</div>
+          <div class="phone-status">12 participantes</div>
+        </div>
+      </div>
+      <div class="chat-area" id="chat">
+        <div class="msg bot">
+          🤖 <b>Bot KM6</b><br>
+          ⚽ Inscrições abertas!<br><br>
+          🧤 <b>goleiro</b> SeuNome<br>
+          ⚽ <b>linha</b> SeuNome<br>
+          🔄 <b>reserva</b> SeuNome<br><br>
+          Digite <b>!lista</b> para ver inscritos.
+          <div class="msg-time">seg 19:00</div>
+        </div>
+      </div>
+      <div class="cmd-btns">
+        <button class="cmd-btn" onclick="simular('goleiro')">goleiro Nome</button>
+        <button class="cmd-btn" onclick="simular('linha')">linha Nome</button>
+        <button class="cmd-btn" onclick="simular('reserva')">reserva Nome</button>
+        <button class="cmd-btn" onclick="simular('lista')">!lista</button>
+        <button class="cmd-btn" onclick="simular('sortear')">!sortear</button>
+        <button class="cmd-btn" onclick="simular('reset')" style="color:#888; border-color:#333;">↺ resetar</button>
+      </div>
+    </div>
+    <a href="https://github.com/afschlosser/futebol-km6" target="_blank" rel="noopener noreferrer" class="github-btn">
+      <i class="fa-brands fa-github"></i> Ver código no GitHub
+    </a>
+  </div>
+</div>
+
+<script>
+  const chat = document.getElementById('chat');
+  let busy = false;
+
+  const estado = {
+    goleiros: [],
+    linha: [],
+    reservas: [],
+    aberta: true
+  };
+
+  const nomes = {
+    goleiro: ['Anderson', 'Carlos'],
+    linha: ['Pedro', 'Lucas', 'Rafael', 'Diego', 'Thiago', 'Felipe', 'Gustavo', 'Marcos'],
+    reserva: ['Bruno', 'João']
+  };
+  const contadores = { goleiro: 0, linha: 0, reserva: 0 };
+
+  function hora() {
+    return new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function addMsg(html, tipo, delay = 0) {
+    return new Promise(res => setTimeout(() => {
+      const div = document.createElement('div');
+      div.className = 'msg ' + tipo;
+      div.innerHTML = html + `<div class="msg-time">${hora()}</div>`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+      res();
+    }, delay));
+  }
+
+  function addTyping() {
+    const d = document.createElement('div');
+    d.className = 'typing'; d.id = 'typing';
+    d.innerHTML = '<span></span><span></span><span></span>';
+    chat.appendChild(d);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function removeTyping() {
+    const t = document.getElementById('typing');
+    if (t) t.remove();
+  }
+
+  function embaralhar(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  async function simular(cmd) {
+    if (busy) return;
+    busy = true;
+
+    document.querySelectorAll('.cmd-btn').forEach(b => b.disabled = true);
+
+    if (cmd === 'reset') {
+      chat.innerHTML = '';
+      estado.goleiros = []; estado.linha = []; estado.reservas = []; estado.aberta = true;
+      contadores.goleiro = 0; contadores.linha = 0; contadores.reserva = 0;
+      await addMsg('🤖 <b>Bot KM6</b><br>⚽ Inscrições abertas!<br><br>🧤 <b>goleiro</b> SeuNome<br>⚽ <b>linha</b> SeuNome<br>🔄 <b>reserva</b> SeuNome<br><br>Digite <b>!lista</b> para ver inscritos.', 'bot');
+      busy = false;
+      document.querySelectorAll('.cmd-btn').forEach(b => b.disabled = false);
+      return;
+    }
+
+    if (cmd === 'goleiro') {
+      const nome = nomes.goleiro[contadores.goleiro % nomes.goleiro.length];
+      contadores.goleiro++;
+      await addMsg(`goleiro ${nome}`, 'in');
+      addTyping();
+      await new Promise(r => setTimeout(r, 800));
+      removeTyping();
+      if (estado.goleiros.length >= 2) {
+        await addMsg('⛔ Já temos 2 goleiros. Vaga esgotada!', 'bot');
+      } else {
+        estado.goleiros.push(nome);
+        await addMsg(`🧤 <b>${nome}</b> confirmado como goleiro! (${estado.goleiros.length}/2)<br>👥 Total: ${estado.goleiros.length + estado.linha.length + estado.reservas.length}/12`, 'bot');
+      }
+    }
+
+    if (cmd === 'linha') {
+      const nome = nomes.linha[contadores.linha % nomes.linha.length];
+      contadores.linha++;
+      await addMsg(`linha ${nome}`, 'in');
+      addTyping();
+      await new Promise(r => setTimeout(r, 800));
+      removeTyping();
+      if (estado.linha.length >= 8) {
+        await addMsg('⛔ Já temos 8 jogadores de linha. Vaga esgotada!', 'bot');
+      } else {
+        estado.linha.push(nome);
+        await addMsg(`⚽ <b>${nome}</b> confirmado na linha! (${estado.linha.length}/8)<br>👥 Total: ${estado.goleiros.length + estado.linha.length + estado.reservas.length}/12`, 'bot');
+      }
+    }
+
+    if (cmd === 'reserva') {
+      const nome = nomes.reserva[contadores.reserva % nomes.reserva.length];
+      contadores.reserva++;
+      await addMsg(`reserva ${nome}`, 'in');
+      addTyping();
+      await new Promise(r => setTimeout(r, 800));
+      removeTyping();
+      if (estado.reservas.length >= 2) {
+        await addMsg('⛔ Já temos 2 reservas. Vaga esgotada!', 'bot');
+      } else {
+        estado.reservas.push(nome);
+        await addMsg(`🔄 <b>${nome}</b> confirmado como reserva! (${estado.reservas.length}/2)<br>👥 Total: ${estado.goleiros.length + estado.linha.length + estado.reservas.length}/12`, 'bot');
+      }
+    }
+
+    if (cmd === 'lista') {
+      await addMsg('!lista', 'in');
+      addTyping();
+      await new Promise(r => setTimeout(r, 900));
+      removeTyping();
+      const total = estado.goleiros.length + estado.linha.length + estado.reservas.length;
+      let msg = `📋 <b>FUTEBOL KM6 — LISTA 🟢 ABERTA</b><br>━━━━━━━━━━━━━━━<br>`;
+      msg += `🧤 <b>Goleiros (${estado.goleiros.length}/2):</b><br>`;
+      msg += estado.goleiros.length ? estado.goleiros.map((n,i) => `  ${i+1}. ${n}`).join('<br>') : '  <i>nenhum ainda</i>';
+      msg += `<br>⚽ <b>Linha (${estado.linha.length}/8):</b><br>`;
+      msg += estado.linha.length ? estado.linha.map((n,i) => `  ${i+1}. ${n}`).join('<br>') : '  <i>nenhum ainda</i>';
+      msg += `<br>🔄 <b>Reservas (${estado.reservas.length}/2):</b><br>`;
+      msg += estado.reservas.length ? estado.reservas.map((n,i) => `  ${i+1}. ${n}`).join('<br>') : '  <i>nenhum ainda</i>';
+      msg += `<br>━━━━━━━━━━━━━━━<br>👥 <b>Total: ${total}/12</b>`;
+      if (total < 12) msg += `<br>⏳ Faltam ${12 - total} jogador(es)!`;
+      else msg += `<br>✅ Lista completa!`;
+      await addMsg(msg, 'bot');
+    }
+
+    if (cmd === 'sortear') {
+      await addMsg('!sortear', 'in');
+      addTyping();
+      await new Promise(r => setTimeout(r, 1200));
+      removeTyping();
+
+      const g = estado.goleiros.length >= 2 ? estado.goleiros : ['Anderson', 'Carlos'];
+      const l = estado.linha.length >= 8 ? estado.linha : ['Pedro','Lucas','Rafael','Diego','Thiago','Felipe','Gustavo','Marcos'];
+      const r = estado.reservas.length >= 2 ? estado.reservas : ['Bruno','João'];
+
+      const gl = embaralhar(g);
+      const ll = embaralhar(l);
+
+      let msg = `⚽ <b>FUTEBOL KM6 QUARTA</b> ⚽<br>━━━━━━━━━━━━━━━<br><br>`;
+      msg += `🟣 <b>TIME ROXO</b><br>🧤 ${gl[0]}<br>`;
+      ll.slice(0,4).forEach((j,i) => msg += `${i+1}. ${j}<br>`);
+      msg += `🔄 Reserva: ${r[0]}<br><br>`;
+      msg += `🟠 <b>TIME LARANJA</b><br>🧤 ${gl[1]}<br>`;
+      ll.slice(4,8).forEach((j,i) => msg += `${i+1}. ${j}<br>`);
+      msg += `🔄 Reserva: ${r[1]}<br><br>`;
+      msg += `━━━━━━━━━━━━━━━<br>📍 Quarta · KM6<br>⏰ Confirmem presença! 🙌`;
+      await addMsg(msg, 'bot');
+    }
+
+    busy = false;
+    document.querySelectorAll('.cmd-btn').forEach(b => b.disabled = false);
+  }
+</script>
+</body>
+</html>
