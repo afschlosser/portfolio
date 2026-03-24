@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #0f0f0f;
@@ -15,6 +19,9 @@ a {
   text-decoration: none;
 }
 
+/* =====================
+   HEADER & NAV
+===================== */
 header {
   background: rgba(15, 15, 15, 0.7);
   backdrop-filter: blur(12px);
@@ -43,78 +50,30 @@ nav {
   align-items: center;
   max-width: 1000px;
   margin: 0 auto;
-  position: relative; /* Essencial para o menu se basear no centro daqui */
-  height: 60px;       /* Defina uma altura para garantir o alinhamento vertical */
+  position: relative;
+  height: 60px;
 }
 
 nav ul {
   list-style: none;
   display: flex;
   gap: 2rem;
-  
-  /* MÁGICA DA CENTRALIZAÇÃO ABSOLUTA */
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* Mantém o logo na esquerda e o botão na direita sem afetar o centro */
-/* --- ENCONTRE ESTE BLOCO E SUBSTITUA --- */
-
 .logo {
-  justify-self: start;  /* Mantém o Grid feliz, na esquerda */
   font-size: 1.1rem;
   font-weight: bold;
-  
-  /* FORÇA A FONTE E A COR ORIGINAL */
-  color: #00bfa5 !important; 
-  font-family: 'Courier New', monospace !important;
-  
+  color: #00bfa5;
+  font-family: 'Courier New', monospace;
   letter-spacing: 2px;
 }
 
-/* --- MANTENHA TODO O RESTANTE ABAIXO EXATAMENTE COMO ESTAVA --- */
-
 .nav-btn {
   z-index: 2;
-  /* Garante que o botão não estique */
-  white-space: nowrap; 
-}
-
-/* Mantém seus estilos de link originais abaixo */
-/* --- RECUPERANDO A ANIMAÇÃO DOS LINKS --- */
-nav ul a {
-  color: #888;
-  font-size: 0.85rem;
-  letter-spacing: 1px;
-  position: relative;     /* Essencial para a linha saber onde começar */
-  padding-bottom: 4px;
-  transition: color 0.2s; /* Suaviza a mudança da cor do texto */
-  display: inline-block;  /* Garante que o link tenha área clicável e de animação */
-}
-
-/* A linha que aparece embaixo */
-nav ul a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;               /* Começa com tamanho zero */
-  height: 1px;
-  background: #00bfa5;    /* Sua cor verde original */
-  transition: width 0.3s; /* A velocidade da animação que você definiu */
-}
-
-/* O efeito ao passar o mouse */
-nav ul a:hover {
-  color: #00bfa5;         /* Muda a cor do texto para verde */
-}
-
-nav ul a:hover::after {
-  width: 100%;            /* A linha cresce até preencher todo o texto */
-}
-
-.nav-btn {
+  white-space: nowrap;
   background: transparent;
   color: #00bfa5;
   border: 0.5px solid #00bfa5;
@@ -145,6 +104,72 @@ nav ul a:hover::after {
   transform: translateX(0);
 }
 
+nav ul a {
+  color: #888;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+nav ul a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #00bfa5;
+  transition: width 0.3s;
+}
+
+nav ul a:hover {
+  color: #00bfa5;
+}
+
+nav ul a:hover::after {
+  width: 100%;
+}
+
+/* =====================
+   HAMBURGER MENU
+===================== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  z-index: 200;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #00bfa5;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Animação de X quando o menu abre */
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* =====================
+   HERO
+===================== */
 #hero {
   text-align: center;
   padding: 6rem 2rem;
@@ -208,12 +233,11 @@ nav ul a:hover::after {
   position: relative;
 }
 
-/* --- BOTÕES DO HERO (AJUSTADOS PARA ALINHAMENTO) --- */
 .hero-btns {
   display: flex;
   gap: 1rem;
   justify-content: center;
-  align-items: center; /* Garante alinhamento vertical */
+  align-items: center;
   position: relative;
   flex-wrap: wrap;
 }
@@ -235,7 +259,6 @@ nav ul a:hover::after {
   background: #00897b;
 }
 
-/* Aplicado ao GitHub e LinkedIn conforme seu padrão original */
 .btn-secondary {
   background: transparent;
   color: #00bfa5;
@@ -253,27 +276,9 @@ nav ul a:hover::after {
   background: rgba(0,191,165,0.1);
 }
 
-/* Botão de CV mantendo seu estilo de borda tracejada */
-.btn-cv {
-  background: rgba(0, 191, 165, 0.05);
-  color: #00bfa5;
-  padding: 0.7rem 1.5rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  border: 1px dashed #00bfa5;
-  transition: all 0.2s;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-cv:hover {
-  background: #00bfa5;
-  color: #0f0f0f;
-}
-
-/* --- SEÇÕES E SKILLS --- */
+/* =====================
+   SKILLS BAR
+===================== */
 .skills-bar {
   background: #111;
   border-top: 0.5px solid #1a1a1a;
@@ -284,9 +289,7 @@ nav ul a:hover::after {
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  
-  /* Aumentamos a margem e garantimos que ela empurre o conteúdo */
-  margin-top: 4rem; 
+  margin-top: 4rem;
   position: relative;
   z-index: 10;
 }
@@ -303,7 +306,7 @@ nav ul a:hover::after {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
-  justify-content: center; /* Centraliza as skills no mobile */
+  justify-content: center;
 }
 
 .skill {
@@ -314,19 +317,17 @@ nav ul a:hover::after {
   padding: 4px 12px;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s; /* Essencial para o efeito de cor no hover */
-  position: relative;   /* Essencial para o efeito Ripple */
-  overflow: hidden;     /* Essencial para o efeito Ripple */
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
   user-select: none;
 }
 
-/* Efeito de Hover que você enviou */
 .skill:hover {
   border-color: #00bfa5;
   color: #00bfa5;
 }
 
-/* Estado Ativo */
 .skill.active {
   border-color: #00bfa5;
   color: #00bfa5;
@@ -334,7 +335,6 @@ nav ul a:hover::after {
   box-shadow: 0 0 8px rgba(0,191,165,0.15);
 }
 
-/* O elemento do Ripple (Gerado pelo seu JS) */
 .ripple {
   position: absolute;
   width: 80px;
@@ -354,74 +354,14 @@ nav ul a:hover::after {
   to { transform: scale(2.5); opacity: 0; }
 }
 
-.skills-label {
-  color: #555;
-  font-size: 0.75rem;
-  margin-right: 0.5rem;
-  font-family: 'Courier New', monospace;
-  letter-spacing: 1px;
-}
-
-.skills-list {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  justify-content: center; /* Centraliza as skills no mobile */
-}
-
-.skill {
-  background: #1a1a1a;
-  border: 0.5px solid #2a2a2a;
-  color: #888;
-  font-size: 0.75rem;
-  padding: 4px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s; /* Essencial para o efeito de cor no hover */
-  position: relative;   /* Essencial para o efeito Ripple */
-  overflow: hidden;     /* Essencial para o efeito Ripple */
-  user-select: none;
-}
-
-/* Efeito de Hover que você enviou */
-.skill:hover {
-  border-color: #00bfa5;
-  color: #00bfa5;
-}
-
-/* Estado Ativo */
-.skill.active {
-  border-color: #00bfa5;
-  color: #00bfa5;
-  background: rgba(0,191,165,0.08);
-  box-shadow: 0 0 8px rgba(0,191,165,0.15);
-}
-
-/* O elemento do Ripple (Gerado pelo seu JS) */
-.ripple {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(0,191,165,0.2);
-  border-radius: 50%;
-  transform: scale(0);
-  animation: ripple-anim 0.6s linear;
-  top: 50%;
-  left: 50%;
-  margin-top: -40px;
-  margin-left: -40px;
-  pointer-events: none;
-}
-
-@keyframes ripple-anim {
-  to { transform: scale(2.5); opacity: 0; }
-}
-
-/* --- CARDS E CONTEÚDO --- */
+/* =====================
+   SECTIONS
+===================== */
 section {
   max-width: 1000px;
   margin: 0 auto;
   padding: 4rem 2rem;
+  scroll-margin-top: 80px; /* Compensa a altura do header fixo */
 }
 
 section h2 {
@@ -447,6 +387,9 @@ section h2::after {
   font-size: 0.95rem;
 }
 
+/* =====================
+   CARDS
+===================== */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -505,7 +448,9 @@ section h2::after {
   letter-spacing: 0.5px;
 }
 
-/* --- PROGRESS BARS --- */
+/* =====================
+   SKILL PROGRESS BARS
+===================== */
 .skill-bars {
   display: flex;
   flex-direction: column;
@@ -537,7 +482,45 @@ section h2::after {
   box-shadow: 0 0 8px rgba(0,191,165,0.4);
 }
 
-/* --- FOOTER --- */
+/* =====================
+   CONTATO
+===================== */
+.contato-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.contato-box p {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #888;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#contato .btn-email {
+  background: #00bfa5;
+  color: #0f0f0f;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0 auto;
+  transition: background 0.2s;
+}
+
+#contato .btn-email:hover {
+  background: #00897b;
+}
+
+/* =====================
+   FOOTER
+===================== */
 footer {
   text-align: center;
   padding: 1.5rem;
@@ -564,7 +547,9 @@ footer {
   50% { opacity: 0.3; }
 }
 
-/* --- RESPONSIVIDADE (MOBILE) --- */
+/* =====================
+   RESPONSIVIDADE (MOBILE)
+===================== */
 @media (max-width: 768px) {
   #hero h1 {
     font-size: 1.8rem;
@@ -578,21 +563,45 @@ footer {
     padding: 0 10px;
   }
 
-  .btn-primary { 
-    grid-column: span 2; 
+  .btn-primary {
+    grid-column: span 2;
     width: 100%;
-    text-align: center;
+    justify-content: center;
   }
 
-  .btn-secondary, .btn-cv {
+  .btn-secondary {
     width: 100%;
-    text-align: center;
+    justify-content: center;
     padding: 0.7rem 0.5rem;
     font-size: 0.8rem;
   }
 
+  .menu-toggle {
+    display: flex;
+  }
+
   nav ul {
-    display: none; 
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(15, 15, 15, 0.97);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    transform: none;
+    z-index: 150;
+  }
+
+  nav ul.active {
+    display: flex;
+  }
+
+  nav ul a {
+    font-size: 1.2rem;
   }
 
   .cards {
@@ -605,53 +614,4 @@ footer {
     padding: 0 15px;
     text-align: justify;
   }
-}
-/* --- AJUSTE FINO DO BLOCO DE CONTATO --- */
-
-#contato p {
-  font-family: inherit; /* herda exatamente do body */
-  font-weight: 400;
-  color: #888; /* mantém seu padrão visual */
-}
-#contato .btn-email {
-  display: block;
-  margin: 0 auto;
-  font-family: 'Segoe UI', sans-serif;
-}
-/* Container que segura texto + botão */
-.contato-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
-/* Texto */
-.contato-box p {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-/* Botão */
-.contato-box .btn-email {
-  margin: 0 auto;
-  font-family: 'Segoe UI', sans-serif;
-}
-#contato .btn-email {
-  background: #00bfa5;
-  color: #0f0f0f !important;
-  padding: 0.8rem 2rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: inline-block;
-  text-align: center;
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0 auto;
-}
-
-#contato .btn-email:hover {
-  background: #00897b;
 }
